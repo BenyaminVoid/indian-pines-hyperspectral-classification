@@ -1,0 +1,65 @@
+{
+  "dataset_shape": [
+    145,
+    145,
+    200
+  ],
+  "ground_truth_shape": [
+    145,
+    145
+  ],
+  "labeled_pixels": 10249,
+  "missing_values": 0,
+  "infinite_values": 0,
+  "iqr_total_flags": 27593,
+  "iqr_pixels_with_flags": 2826,
+  "preprocessing": [
+    "median imputation inside pipelines",
+    "standardization",
+    "PCA embedding with 20 components",
+    "no feature one-hot encoding because all predictors are numeric spectral bands"
+  ],
+  "model_comparison": [
+    {
+      "model": "Support Vector Machine",
+      "test_accuracy": 0.812,
+      "macro_f1": 0.8388442657830992,
+      "weighted_f1": 0.8127633986335305,
+      "cv_mean_accuracy": 0.804,
+      "cv_std": 0.008
+    },
+    {
+      "model": "Random Forest",
+      "test_accuracy": 0.796,
+      "macro_f1": 0.7628693349742046,
+      "weighted_f1": 0.7873671149760203,
+      "cv_mean_accuracy": 0.782,
+      "cv_std": 0.006
+    },
+    {
+      "model": "Gradient Boosting",
+      "test_accuracy": 0.753,
+      "macro_f1": 0.679184562305196,
+      "weighted_f1": 0.7461376881653907,
+      "cv_mean_accuracy": 0.74,
+      "cv_std": 0.008
+    },
+    {
+      "model": "k-Nearest Neighbors",
+      "test_accuracy": 0.749,
+      "macro_f1": 0.7154440152352204,
+      "weighted_f1": 0.7396995493274362,
+      "cv_mean_accuracy": 0.742,
+      "cv_std": 0.01
+    },
+    {
+      "model": "Most Common Class",
+      "test_accuracy": 0.24,
+      "macro_f1": 0.024153876426603698,
+      "weighted_f1": 0.09256236741824325,
+      "cv_mean_accuracy": 0.24,
+      "cv_std": 0.0
+    }
+  ],
+  "best_test_model": "Support Vector Machine"
+}

@@ -1,0 +1,76 @@
+{
+  "dataset_shape": [
+    145,
+    145,
+    200
+  ],
+  "ground_truth_shape": [
+    145,
+    145
+  ],
+  "labeled_pixels": 10249,
+  "unlabeled_pixels": 10776,
+  "features": 200,
+  "classes": 16,
+  "missing_values_in_X": 0,
+  "infinite_values_in_X": 0,
+  "duplicate_spectral_rows": 0,
+  "iqr_total_flags": 27593,
+  "iqr_bands_with_flags": 91,
+  "iqr_pixels_with_flags": 2826,
+  "iqr_max_flagged_bands_for_one_pixel": 67,
+  "top_iqr_bands": [
+    {
+      "band": 40,
+      "iqr_flagged_pixels": 1803
+    },
+    {
+      "band": 56,
+      "iqr_flagged_pixels": 1171
+    },
+    {
+      "band": 74,
+      "iqr_flagged_pixels": 1133
+    },
+    {
+      "band": 62,
+      "iqr_flagged_pixels": 1008
+    },
+    {
+      "band": 55,
+      "iqr_flagged_pixels": 1005
+    },
+    {
+      "band": 54,
+      "iqr_flagged_pixels": 858
+    },
+    {
+      "band": 46,
+      "iqr_flagged_pixels": 858
+    },
+    {
+      "band": 42,
+      "iqr_flagged_pixels": 849
+    },
+    {
+      "band": 41,
+      "iqr_flagged_pixels": 840
+    },
+    {
+      "band": 43,
+      "iqr_flagged_pixels": 838
+    }
+  ],
+  "smallest_classes": {
+    "9": 20,
+    "7": 28,
+    "1": 46,
+    "16": 93,
+    "13": 205
+  },
+  "pca_20_component_explained_variance": 0.9764492511749268,
+  "cleaning_decision": "Retain IQR-flagged labeled pixels because they may be valid spectral signatures and minority classes are small.",
+  "filling_method": "SimpleImputer(strategy=\"median\") inside each modeling pipeline; no actual fill needed because missing count is zero.",
+  "encoding_decision": "No feature one-hot encoding because all predictors are continuous spectral bands; target class IDs remain integer labels for scikit-learn.",
+  "embedding_method": "PCA with 20 components after median imputation and standardization."
+}

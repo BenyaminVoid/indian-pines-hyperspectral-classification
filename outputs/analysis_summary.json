@@ -1,0 +1,193 @@
+{
+  "dataset_shape": [
+    145,
+    145,
+    200
+  ],
+  "gt_shape": [
+    145,
+    145
+  ],
+  "labeled_pixels": 10249,
+  "class_counts": [
+    {
+      "class_id": 1,
+      "class_name": "Alfalfa",
+      "pixels": 46
+    },
+    {
+      "class_id": 2,
+      "class_name": "Corn-notill",
+      "pixels": 1428
+    },
+    {
+      "class_id": 3,
+      "class_name": "Corn-mintill",
+      "pixels": 830
+    },
+    {
+      "class_id": 4,
+      "class_name": "Corn",
+      "pixels": 237
+    },
+    {
+      "class_id": 5,
+      "class_name": "Grass-pasture",
+      "pixels": 483
+    },
+    {
+      "class_id": 6,
+      "class_name": "Grass-trees",
+      "pixels": 730
+    },
+    {
+      "class_id": 7,
+      "class_name": "Grass-pasture-mowed",
+      "pixels": 28
+    },
+    {
+      "class_id": 8,
+      "class_name": "Hay-windrowed",
+      "pixels": 478
+    },
+    {
+      "class_id": 9,
+      "class_name": "Oats",
+      "pixels": 20
+    },
+    {
+      "class_id": 10,
+      "class_name": "Soybean-notill",
+      "pixels": 972
+    },
+    {
+      "class_id": 11,
+      "class_name": "Soybean-mintill",
+      "pixels": 2455
+    },
+    {
+      "class_id": 12,
+      "class_name": "Soybean-clean",
+      "pixels": 593
+    },
+    {
+      "class_id": 13,
+      "class_name": "Wheat",
+      "pixels": 205
+    },
+    {
+      "class_id": 14,
+      "class_name": "Woods",
+      "pixels": 1265
+    },
+    {
+      "class_id": 15,
+      "class_name": "Buildings-Grass-Trees-Drives",
+      "pixels": 386
+    },
+    {
+      "class_id": 16,
+      "class_name": "Stone-Steel-Towers",
+      "pixels": 93
+    }
+  ],
+  "models": {
+    "Random Forest": {
+      "test_accuracy": 0.7941463414634147,
+      "cv_mean": 0.7781256618135387,
+      "cv_std": 0.007202980979007047,
+      "macro_f1": 0.7489707598807944,
+      "weighted_f1": 0.7858597662565064
+    },
+    "Gradient Boosting": {
+      "test_accuracy": 0.7570731707317073,
+      "cv_mean": 0.7372434904962719,
+      "cv_std": 0.006076971298328203,
+      "macro_f1": 0.6821157940285012,
+      "weighted_f1": 0.7497003576586174
+    },
+    "Support Vector Machine": {
+      "test_accuracy": 0.8117073170731708,
+      "cv_mean": 0.8044696102076748,
+      "cv_std": 0.007268260107028894,
+      "macro_f1": 0.840304856680419,
+      "weighted_f1": 0.8126272018286608
+    }
+  },
+  "tuned_random_forest": {
+    "random_best_params": {
+      "model__n_estimators": 80,
+      "model__min_samples_split": 2,
+      "model__min_samples_leaf": 2,
+      "model__max_depth": null
+    },
+    "random_best_cv": 0.7638744131525238,
+    "grid_best_params": {
+      "model__max_depth": null,
+      "model__min_samples_leaf": 1,
+      "model__min_samples_split": 5,
+      "model__n_estimators": 120
+    },
+    "grid_best_cv": 0.7632641215287488,
+    "grid_test_accuracy": 0.8004878048780488
+  },
+  "report": "C:\\Users\\user\\Desktop\\Unime - Data Analysis\\Data Mining and Analysis\\HSI Project\\outputs\\Indian_Pines_Data_Mining_Project.docx",
+  "missing_values_in_X": 0,
+  "infinite_values_in_X": 0,
+  "duplicate_spectral_rows": 0,
+  "iqr_outlier_diagnostics": {
+    "total_flags": 27593,
+    "bands_with_flags": 91,
+    "pixels_with_flags": 2826,
+    "max_flagged_bands_for_one_pixel": 67,
+    "top_iqr_bands": [
+      {
+        "band": 40,
+        "iqr_flagged_pixels": 1803
+      },
+      {
+        "band": 56,
+        "iqr_flagged_pixels": 1171
+      },
+      {
+        "band": 74,
+        "iqr_flagged_pixels": 1133
+      },
+      {
+        "band": 62,
+        "iqr_flagged_pixels": 1008
+      },
+      {
+        "band": 55,
+        "iqr_flagged_pixels": 1005
+      },
+      {
+        "band": 54,
+        "iqr_flagged_pixels": 858
+      },
+      {
+        "band": 46,
+        "iqr_flagged_pixels": 858
+      },
+      {
+        "band": 42,
+        "iqr_flagged_pixels": 849
+      },
+      {
+        "band": 41,
+        "iqr_flagged_pixels": 840
+      },
+      {
+        "band": 43,
+        "iqr_flagged_pixels": 838
+      }
+    ],
+    "decision": "Retain IQR-flagged labeled pixels because they may be valid spectral signatures and minority classes are small."
+  },
+  "preprocessing_decisions": {
+    "filling_method": "SimpleImputer(strategy=\"median\") inside each modeling pipeline; no actual fill needed because missing count is zero.",
+    "encoding_decision": "No feature one-hot encoding because all predictors are continuous spectral bands; target class IDs remain integer labels for scikit-learn.",
+    "embedding_method": "PCA with 20 components after median imputation and standardization.",
+    "pca_20_component_explained_variance": 0.9764492511749268
+  }
+}
