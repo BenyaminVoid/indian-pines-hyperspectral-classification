@@ -126,20 +126,6 @@ Generated figures and JSON summaries are saved under:
 outputs/
 ```
 
-## Report
-
-The written report is available as LaTeX source:
-
-```text
-Indian_Pines_Data_Mining_Report.tex
-```
-
-A compiled PDF copy is also included:
-
-```text
-hsi_data_mining.pdf
-```
-
 ## Notes
 
 - Random seed: 42
