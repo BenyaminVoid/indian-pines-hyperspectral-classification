@@ -69,8 +69,38 @@
     "13": 205
   },
   "pca_20_component_explained_variance": 0.9764492511749268,
-  "cleaning_decision": "Retain IQR-flagged labeled pixels because they may be valid spectral signatures and minority classes are small.",
+  "cleaning_decision": "Start from Indian_pines.mat, remove known noisy/water-absorption bands 104-108, 150-163, and 220, verify the result matches Indian_pines_corrected.mat, and retain IQR-flagged labeled pixels because they may be valid spectral signatures and minority classes are small.",
   "filling_method": "SimpleImputer(strategy=\"median\") inside each modeling pipeline; no actual fill needed because missing count is zero.",
   "encoding_decision": "No feature one-hot encoding because all predictors are continuous spectral bands; target class IDs remain integer labels for scikit-learn.",
-  "embedding_method": "PCA with 20 components after median imputation and standardization."
+  "embedding_method": "PCA with 20 components after median imputation and standardization.",
+  "raw_dataset_shape": [
+    145,
+    145,
+    220
+  ],
+  "raw_spectral_bands": 220,
+  "removed_noisy_water_absorption_bands_1based": [
+    104,
+    105,
+    106,
+    107,
+    108,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    220
+  ],
+  "cleaned_spectral_bands": 200,
+  "matches_corrected_reference_file": true
 }

@@ -6,11 +6,12 @@ This project applies a complete data mining workflow to classify land-cover type
 
 ## Project Overview
 
-The selected problem is multi-class classification. Each labeled pixel is represented by 200 corrected spectral bands, and the target is one of 16 land-cover classes.
+The selected problem is multi-class classification. The raw cube contains 220 spectral bands. The project removes known noisy and water-absorption bands from the raw file, producing the standard 200-band corrected representation used for modeling. Each labeled pixel is represented by 200 cleaned spectral bands, and the target is one of 16 land-cover classes.
 
 - Dataset: Indian Pines hyperspectral image
 - Image size: 145 x 145 pixels
-- Corrected spectral bands: 200
+- Raw spectral bands: 220
+- Cleaned spectral bands used: 200
 - Labeled pixels used for modeling: 10,249
 - Classes: 16 land-cover categories
 - Best model: Support Vector Machine
@@ -37,11 +38,13 @@ The selected problem is multi-class classification. Each labeled pixel is repres
 |   |   |-- 08_band_pixel_cleaning_diagnostics.png
 |   |   |-- 09_accuracy_comparison.png
 |   |   |-- 10_pca_explained_variance.png
-|   |   `-- 11_prediction_map.png
+|   |   |-- 11_prediction_map.png
+|   |   `-- 12_cm_tuned_support_vector_machine.png
 |   |-- analysis_summary.json
 |   |-- baseline_model_results.json
 |   |-- data_quality_summary.json
-|   `-- enhanced_data_mining_summary.json
+|   |-- enhanced_data_mining_summary.json
+|   `-- svm_tuning_results.json
 |-- Indian_Pines_Data_Mining_Project_Notebook.ipynb
 |-- Indian_Pines_Data_Mining_Report.tex
 |-- hsi_data_mining.pdf
@@ -51,18 +54,22 @@ The selected problem is multi-class classification. Each labeled pixel is repres
 
 ## Workflow
 
-1. Load the corrected hyperspectral cube and ground-truth labels.
-2. Remove unlabeled pixels with class label 0.
-3. Explore the data using pseudo-RGB visualization, ground-truth mapping, class distribution, spectral signatures, and correlation analysis.
-4. Audit data quality by checking missing values, infinite values, duplicate rows, and IQR-based outlier flags.
-5. Preprocess features using median imputation, standardization, and PCA.
-6. Train and compare baseline and main classifiers.
-7. Evaluate performance using test accuracy, macro F1-score, weighted F1-score, confusion matrices, and 3-fold stratified cross-validation.
-8. Tune Random Forest with RandomizedSearchCV and GridSearchCV.
+1. Load the raw hyperspectral cube and ground-truth labels.
+2. Remove known noisy/water-absorption bands from the raw cube: 104-108, 150-163, and 220.
+3. Verify that the cleaned cube matches `Indian_pines_corrected.mat`.
+4. Remove unlabeled pixels with class label 0.
+5. Explore the data using pseudo-RGB visualization, ground-truth mapping, class distribution, spectral signatures, and correlation analysis.
+6. Audit data quality by checking missing values, infinite values, duplicate rows, and IQR-based outlier flags.
+7. Preprocess features using median imputation, standardization, and PCA.
+8. Train and compare baseline and main classifiers.
+9. Evaluate performance using test accuracy, macro F1-score, weighted F1-score, confusion matrices, and 3-fold stratified cross-validation.
+10. Tune Support Vector Machine with RandomizedSearchCV and GridSearchCV.
 
 ## Data Cleaning Summary
 
-The corrected dataset contains no missing values, no infinite values, and no duplicate spectral rows among labeled pixels. IQR diagnostics identified unusual reflectance values, but these values were retained because hyperspectral outliers can represent valid material signatures. Removing them automatically could also reduce already-small minority classes such as Oats, Grass-pasture-mowed, and Alfalfa.
+The project starts from `Indian_pines.mat`, the raw 220-band cube. Bands 104-108, 150-163, and 220 are removed because they are known noisy/water-absorption bands. The cleaned result is exactly equal to `Indian_pines_corrected.mat`, so the notebook both demonstrates the cleaning step and keeps the standard benchmark representation.
+
+The cleaned dataset contains no missing values, no infinite values, and no duplicate spectral rows among labeled pixels. IQR diagnostics identified unusual reflectance values, but these values were retained because hyperspectral outliers can represent valid material signatures. Removing them automatically could also reduce already-small minority classes such as Oats, Grass-pasture-mowed, and Alfalfa.
 
 The cleaning section includes a deterministic diagnostic figure inspired by common hyperspectral visualization notebooks:
 
@@ -78,7 +85,28 @@ The cleaning section includes a deterministic diagnostic figure inspired by comm
 | Gradient Boosting | 0.757 | 0.737 +/- 0.006 | 0.682 | 0.750 |
 | Support Vector Machine | **0.812** | **0.804 +/- 0.007** | **0.840** | **0.813** |
 
-Support Vector Machine produced the strongest overall result, with the best test accuracy, cross-validation accuracy, and macro F1-score.
+Support Vector Machine produced the strongest untuned result, with the best test accuracy, cross-validation accuracy, and macro F1-score.
+
+## Tuned SVM Result
+
+Because SVM was the best untuned model, hyperparameter tuning was applied to SVM instead of Random Forest. The best grid-search parameters were:
+
+```text
+C = 30
+gamma = 0.03
+```
+
+The tuned SVM achieved:
+
+```text
+Test accuracy: 0.831
+Macro F1:      0.848
+Weighted F1:   0.831
+```
+
+Tuned SVM confusion matrix:
+
+![Tuned SVM confusion matrix](outputs/figures/12_cm_tuned_support_vector_machine.png)
 
 ## Key Visualizations
 
@@ -97,6 +125,10 @@ Model accuracy comparison:
 Support Vector Machine confusion matrix:
 
 ![SVM confusion matrix](outputs/figures/06_cm_support_vector_machine.png)
+
+Tuned SVM prediction map:
+
+![Tuned SVM prediction map](outputs/figures/11_prediction_map.png)
 
 ## How To Run
 
@@ -130,6 +162,7 @@ outputs/
 
 - Random seed: 42
 - Train/test split: 80/20 stratified split
+- Raw-band cleaning: remove bands 104-108, 150-163, and 220
 - PCA components: 20
 - PCA explained variance with 20 components: approximately 97.64%
 - Cross-validation: 3-fold stratified cross-validation

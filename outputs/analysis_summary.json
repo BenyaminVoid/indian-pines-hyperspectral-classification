@@ -114,23 +114,6 @@
       "weighted_f1": 0.8126272018286608
     }
   },
-  "tuned_random_forest": {
-    "random_best_params": {
-      "model__n_estimators": 80,
-      "model__min_samples_split": 2,
-      "model__min_samples_leaf": 2,
-      "model__max_depth": null
-    },
-    "random_best_cv": 0.7638744131525238,
-    "grid_best_params": {
-      "model__max_depth": null,
-      "model__min_samples_leaf": 1,
-      "model__min_samples_split": 5,
-      "model__n_estimators": 120
-    },
-    "grid_best_cv": 0.7632641215287488,
-    "grid_test_accuracy": 0.8004878048780488
-  },
   "report": "C:\\Users\\user\\Desktop\\Unime - Data Analysis\\Data Mining and Analysis\\HSI Project\\outputs\\Indian_Pines_Data_Mining_Project.docx",
   "missing_values_in_X": 0,
   "infinite_values_in_X": 0,
@@ -188,6 +171,52 @@
     "filling_method": "SimpleImputer(strategy=\"median\") inside each modeling pipeline; no actual fill needed because missing count is zero.",
     "encoding_decision": "No feature one-hot encoding because all predictors are continuous spectral bands; target class IDs remain integer labels for scikit-learn.",
     "embedding_method": "PCA with 20 components after median imputation and standardization.",
-    "pca_20_component_explained_variance": 0.9764492511749268
+    "pca_20_component_explained_variance": 0.9764492511749268,
+    "raw_band_cleaning": "Loaded Indian_pines.mat, removed bands 104-108, 150-163, and 220, and verified the cleaned cube equals Indian_pines_corrected.mat."
+  },
+  "raw_dataset_shape": [
+    145,
+    145,
+    220
+  ],
+  "raw_spectral_bands": 220,
+  "removed_noisy_water_absorption_bands_1based": [
+    104,
+    105,
+    106,
+    107,
+    108,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    220
+  ],
+  "cleaned_spectral_bands": 200,
+  "matches_corrected_reference_file": true,
+  "tuned_support_vector_machine": {
+    "random_best_params": {
+      "model__gamma": "scale",
+      "model__C": 100
+    },
+    "random_best_cv": 0.8094889592345546,
+    "grid_best_params": {
+      "model__C": 30,
+      "model__gamma": 0.03
+    },
+    "grid_best_cv": 0.8224175735902273,
+    "grid_test_accuracy": 0.8307317073170731,
+    "macro_f1": 0.8483164771061246,
+    "weighted_f1": 0.8311346821673004
   }
 }
